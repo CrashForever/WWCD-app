@@ -1,44 +1,40 @@
 .container
-  form role="form" action="/repo" method='post' id='add-repo-form'
-    .row.vertical-align.query-bar
-      .col-xs-2
-        .text-right Github URL:
-      .col-xs-8
-        input{ 
-          type='text' name='github_url'
-          id='github_url_input' class="form-control"
-          placeholder="e.g.: https://www.github.com/soumyaray/YPBT-app"
-        } 
-      .col-xs-2
-        button{ 
-            type='submit' id='repo-form-submit' class='submit' 
-            value='submit' class="btn btn-success" 
-          } + Add Repo
+  / - video_id.each.with_index do |item, index|
+  /   .video_id.size #{video_id.size}
+  .container-fluid
     .row
-      .col-xs-12.blank-row
-  table class="table" id="repos_table"
-    thead
-      tr
-        th Repo Name
-        th Github URL
-        th Contributors
-    tbody
-      - repos.each.with_index do |repo, index|
-        tr class="repo_row" id="repo[#{index}].row"
-          td
-            span class="repo_name" id="repo[#{index}].name"
-              a href="/repo/#{repo.owner.username}/#{repo.name}" id="repo[#{index}].link" #{repo.name}
-          td
-            span class="repo_gh_url" id="repo[#{index}].gh_url"
-              = repo.git_url
-          td
-            table id="repo[#{index}].contributors_table"
-              tr
-                td
-                  span class="repo_table_owner" id="repo[#{index}].owner"
-                    = "#{repo.owner.username} (#{repo.owner.email})"
-              - repo.contributors.each do |contrib|
-                tr
-                  td
-                    span class="repo_table_contributor" id="repo[#{index}].contributor"
-                      = "#{contrib.username} (#{contrib.email})"
+      - video_id.each.with_index do |item, index|
+            .col-sm-4
+              .card style=("width: 20rem;margin-top:3%;")
+                .card-body
+                  h4.card-title Card title
+                  iframe.youtube-player frameborder="0" height="10%" width="100%"  src="http://www.youtube.com/embed/#{item['video_id']}" type="text/html"
+                  br
+                  a.btn.btn-primary href="https://www.youtube.com/watch?v=#{item['video_id']}"  Go Watch Video!
+/   table class='table' id="query_results_table"
+/     thead
+/       tr
+/         th URL
+/     tbody
+/       - video_id.each.with_index do |video_id, index|
+/         tr class='query_result_row' id="#{index}_row"
+/           td
+/             span class="query_url" id="url_#{index}"
+/               a href="https://www.youtube.com/watch?v=#{video_id['video_id']}" https://www.youtube.com/watch?v=#{video_id['video_id']}
+
+
+
+/ #carouselExampleControls.carousel.slide data-ride="carousel"
+/   .carousel-inner
+/     .carousel-item.active
+/       img.d-block.w-100 alt=("First slide") src="..." /
+/     .carousel-item
+/       img.d-block.w-100 alt=("Second slide") src="..." /
+/     .carousel-item
+/       img.d-block.w-100 alt=("Third slide") src="..." /
+/   a.carousel-control-prev data-slide="prev" href="#carouselExampleControls" role="button"
+/     span.carousel-control-prev-icon aria-hidden="true"
+/     span.sr-only Previous
+/   a.carousel-control-next data-slide="next" href="#carouselExampleControls" role="button"
+/     span.carousel-control-next-icon aria-hidden="true"
+/     span.sr-only Next

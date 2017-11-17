@@ -1,39 +1,41 @@
 doctype html
 html
   head
-    title CodePraise
+    title VideosPraise
+    link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" rel="stylesheet"
 
-    / Bootstrap CSS and theme (United Theme)
-    link{
-      href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/united/bootstrap.min.css"
-      rel="stylesheet" integrity="sha384-pVJelSCJ58Og1XDc2E95RVYHZDPb9AVyXsI8NoVpB2xmtxoZKJePbMfE4mlXw7BJ"
-      crossorigin="anonymous"
-    }
-    / Custom CSS
-    / link rel='stylesheet' href='/presentation/assets/css/style.css'
     == assets(:css)
+
   body
-    / JQuery and Bootstrap JS
-    script{ 
-      src="https://code.jquery.com/jquery-1.12.4.min.js"
-      integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" 
-      crossorigin="anonymous" 
-    }
-    script{
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-      integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-      crossorigin="anonymous"
-    }
+    script crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    script crossorigin="anonymous" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+    script crossorigin="anonymous" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
 
-    .container id='html_body'
-      section
-        .row style="vertical-align: middle;"
-          .col-xs-12
-            h1 
-              a href="/" CodePraise
+    nav.navbar.navbar-light.bg-dark.justify-content-between
+      a.navbar-brand
+        h1.text-secondary VideosPraise
+      form.form-inline.w-50.p-3 role="form" action="/search" method='post' id='search_form'
+        input.form-control.mr-sm-2{
+          style="width: 70%;margin-left: -40%"
+          aria-label="Search"
+          placeholder="e.g.: tomato recipe"
+          type="search"
+          name='search_name'
+        }
+        button.btn.btn-outline-light.my-2.my-sm-0{
+          type="submit"
+          id="search_btn"
+          value="submit"
+        }   Search
 
-      section
-        == yield
+    section
+      == yield
 
-      footer
-        = "CodePraise is made for demonstration purposes. We cannot warrant full correctness of all content. CodePraise uses cookies but does not track users or record behavior."
+    / footer.fixed-bottom
+    /   = "VideosPraise is made for SOA project"
+
+      /! 巡覽置底
+    .container.col-md-4.col-md-offset-4.fixed-bottom
+      | VideosPraise is made for SOA project
+    / footer#id_footer.fixed-bottom
+    /   | VideosPraise is made for SOA project

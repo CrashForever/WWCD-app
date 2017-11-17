@@ -4,12 +4,11 @@
 # USAGE:
 #   collab = # Get from gateway
 #   CollaboratorRepresenter.new(OpenStruct.new).from_json collab
-module CodePraise
-  class CollaboratorRepresenter < Roar::Decorator
+module VideosPraise
+  class VideosRepresenter < Roar::Decorator
     include Roar::JSON
 
-    property :origin_id
-    property :username
-    property :email
+    property :query_name
+    collection :video_id
   end
 end
