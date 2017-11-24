@@ -19,6 +19,7 @@ module VideosPraise
         video_results_json = ApiGateway.new.all_recipe_video
         all_video = VideosPraise::AllVideosRepresenter.new(OpenStruct.new)
                                                 .from_json video_results_json
+        videos = Views::AllVideos.new(all_video)
         puts all_video.all_videos
         # tmp = {}
         # all_video.all_videos.each do|x|
@@ -27,7 +28,8 @@ module VideosPraise
         # puts tmp
         # tmp.each{|x| puts x}
         view 'home', locals: {
-                                  video_id: all_video.all_videos
+                                  videos: videos
+                                  # video_id: all_video.all_videos
                               }
       end
 
@@ -40,9 +42,9 @@ module VideosPraise
           video_results_json = ApiGateway.new.create_recipe_video(search_name)
           results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
                                                   .from_json video_results_json
+          results = Views::ResultsVideo.new(results_video)
           view 'search_results', locals: {
-                                    name: results_video.query_name,
-                                    video_id: results_video.video_id
+                                    results: results
                                 }
           # ownername, reponame = gh_url.split('/')[-2..-1]
           # ApiGateway.new.create_repo(ownername, reponame)

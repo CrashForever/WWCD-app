@@ -3,14 +3,14 @@
   /   .video_id.size #{video_id.size}
   .container-fluid
     .row
-      - video_id.each.with_index do |item, index|
+      - videos.all.each.with_index do |video, index|
             .col-sm-4
               .card style=("width: 20rem;margin-top:3%;")
                 .card-body
                   h4.card-title Card title
-                  iframe.youtube-player frameborder="0" height="10%" width="100%"  src="http://www.youtube.com/embed/#{item['video_id']}" type="text/html"
+                  iframe.youtube-player frameborder="0" height="10%" width="100%"  src="http://www.youtube.com/embed/#{video.id}" type="text/html"
                   br
-                  a.btn.btn-primary href="https://www.youtube.com/watch?v=#{item['video_id']}"  Go Watch Video!
+                  a.btn.btn-primary href="https://www.youtube.com/watch?v=#{video.id}"  Go Watch Video!
 /   table class='table' id="query_results_table"
 /     thead
 /       tr
