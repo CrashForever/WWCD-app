@@ -49,7 +49,6 @@ module VideosPraise
             view 'search_results', locals: {
               results: results
             }
-            flash[:notice] = 'Search success!'
           rescue
             flash[:error] = 'Search failed!'
             routing.redirect '/'

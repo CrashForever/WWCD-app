@@ -4,13 +4,13 @@
       tr
         th Name
         th URL
-        th #{results.name}
+        th #{results.query_name}
     tbody
-      - results.videosid.each.with_index do |video_id, index|
+      - results.results_video.each.with_index do |video_id, index|
         tr class='query_result_row' id="#{index}_row"
           td
             span class="query_name" id="query_name#{index}"
-              a href="/" id="tmp" #{results.name}
+              a href="/" id="tmp" #{results.query_name}
           td
             span class="query_url" id="url_#{index}"
               a href="https://www.youtube.com/watch?v=#{video_id}" https://www.youtube.com/watch?v=#{video_id}
