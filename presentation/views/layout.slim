@@ -13,7 +13,7 @@ html
 
     nav.navbar.navbar-light.bg-dark.justify-content-between
       a.navbar-brand
-        h1.text-secondary VideosPraise
+        h1.text-secondary id='main_header' VideosPraise
       form.form-inline.w-50.p-3 role="form" action="/search" method='post' id='search_form'
         input.form-control.mr-sm-2{
           style="width: 70%;margin-left: -40%"
@@ -29,6 +29,7 @@ html
         }   Search
 
     section
+      include :flash_bar
       == yield
 
     / footer.fixed-bottom
