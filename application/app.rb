@@ -24,7 +24,7 @@ module VideosPraise
                                                       .from_json video_results_json
         videos = Views::AllVideos.new(all_video)
 
-        flash.now[:notice] = 'Search Some Recepts!' if all_video.count == 0
+        flash.now[:notice] = 'Search Some Recepts!' if videos.none?
 
         # tmp = {}
         # all_video.all_videos.each do|x|
@@ -46,15 +46,16 @@ module VideosPraise
             results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
                                                            .from_json video_results_json
             results = Views::ResultsVideo.new(results_video)
+            flash[:notice] = 'Search success!'
             view 'search_results', locals: {
               results: results
             }
           rescue
             flash[:error] = 'Search failed!'
-            routing.redirect '/'
             # ownername, reponame = gh_url.split('/')[-2..-1]
             # ApiGateway.new.create_repo(ownername, reponame)
           end
+          routing.redirect '/'
         end
       end
     end
