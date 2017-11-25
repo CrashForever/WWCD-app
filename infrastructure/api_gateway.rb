@@ -20,6 +20,10 @@ module VideosPraise
       call_api(:post, 'videosearch/'+search_name)
     end
 
+    def delete_all_videos
+      call_api(:delete, 'delete_videos')
+    end
+
     def call_api(method, resources)
       url_route = [@config.api_url, resources].flatten.join'/'
       result = HTTP.send(method, url_route)
