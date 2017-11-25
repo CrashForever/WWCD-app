@@ -13,6 +13,7 @@ gem 'rake' # to run console in production
 # Web application related
 gem 'econfig'
 gem 'puma'
+gem 'rack-flash3'
 gem 'roda'
 gem 'slim'
 
@@ -24,10 +25,9 @@ group :test do
   gem 'minitest'
   gem 'minitest-rg'
   gem 'rack-test'
-  gem 'rake'
-  gem 'simplecov'
-  gem 'vcr'
-  gem 'webmock'
+
+  gem 'headless'
+  gem 'watir'
 end
 
 group :development, :test do
