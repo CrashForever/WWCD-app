@@ -1,4 +1,4 @@
-h1 {
+/*h1 {
   font-weight: bold;
 }
 
@@ -30,8 +30,7 @@ h1 {
 .vertical-align > [class*=" col-"] {
   display: flex;
   align-items: center;
-  justify-content: center; /* Optional, to align inner items
-                              horizontally inside the column */
+  justify-content: center;
 }
 
 .blank-row {
@@ -47,4 +46,4 @@ footer {
   padding: 0.5in;
   font-size:11px;
   color:rgb(100, 100, 100);
-}
+}*/

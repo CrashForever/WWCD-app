@@ -1,6 +1,7 @@
 .container
   / - video_id.each.with_index do |item, index|
   /   .video_id.size #{video_id.size}
+  img src="/images/logo.png"
   .container-fluid
     .row
       - videos.all.each.with_index do |video, index|
@@ -11,30 +12,3 @@
                   iframe.youtube-player frameborder="0" height="10%" width="100%"  src="http://www.youtube.com/embed/#{video.id}" type="text/html"
                   br
                   a.btn.btn-primary href="https://www.youtube.com/watch?v=#{video.id}"  Go Watch Video!
-/   table class='table' id="query_results_table"
-/     thead
-/       tr
-/         th URL
-/     tbody
-/       - video_id.each.with_index do |video_id, index|
-/         tr class='query_result_row' id="#{index}_row"
-/           td
-/             span class="query_url" id="url_#{index}"
-/               a href="https://www.youtube.com/watch?v=#{video_id['video_id']}" https://www.youtube.com/watch?v=#{video_id['video_id']}
-
-
-
-/ #carouselExampleControls.carousel.slide data-ride="carousel"
-/   .carousel-inner
-/     .carousel-item.active
-/       img.d-block.w-100 alt=("First slide") src="..." /
-/     .carousel-item
-/       img.d-block.w-100 alt=("Second slide") src="..." /
-/     .carousel-item
-/       img.d-block.w-100 alt=("Third slide") src="..." /
-/   a.carousel-control-prev data-slide="prev" href="#carouselExampleControls" role="button"
-/     span.carousel-control-prev-icon aria-hidden="true"
-/     span.sr-only Previous
-/   a.carousel-control-next data-slide="next" href="#carouselExampleControls" role="button"
-/     span.carousel-control-next-icon aria-hidden="true"
-/     span.sr-only Next

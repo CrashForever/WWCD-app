@@ -1,0 +1,16 @@
+.container
+  ul#myTab.nav.nav-tabs role="tablist"
+    li.nav-item
+      a#home-tab.nav-link.active aria-controls="home" aria-selected="true" data-toggle="tab" href="#home" role="tab"  Home
+    li.nav-item
+      a#profile-tab.nav-link aria-controls="profile" aria-selected="false" data-toggle="tab" href="#profile" role="tab"  Profile
+
+  #myTabContent.tab-content
+    #home.tab-pane.fade.show.active aria-labelledby="home-tab" role="tabpanel"
+      .row
+        .col-sm-4
+          .card style=("width: 20rem;margin-top:3%;")
+            .card-body
+              h4.card-title Card title
+                |upload success!!!
+    #profile.tab-pane.fade aria-labelledby="profile-tab" role="tabpanel"  ...

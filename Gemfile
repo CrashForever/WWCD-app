@@ -5,7 +5,7 @@ ruby '2.4.1'
 
 # Networking gems
 gem 'http'
-
+gem 'rest-client'
 # Development/Debugging related
 gem 'pry' # to run console in production
 gem 'rake' # to run console in production
