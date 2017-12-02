@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'http'
+require 'json'
+require 'rest_client'
 
 module VideosPraise
   class ApiGateway
@@ -15,9 +17,20 @@ module VideosPraise
     # def repo(username, reponame)
     #   call_api(:get, ['repo', username, reponame])
     # end
+    def identify_img(file)
+      url_route = [@config.api_url, 'google_vision'].flatten.join'/'
+      puts url_route
+      results = RestClient.post(url_route,
+          :file => File.new(file))
+      puts results.to_s 
+    end
 
     def create_recipe_video(search_name)
       call_api(:post, 'videosearch/'+search_name)
+    end
+
+    def delete_all_videos
+      call_api(:delete, 'delete_videos')
     end
 
     def call_api(method, resources)

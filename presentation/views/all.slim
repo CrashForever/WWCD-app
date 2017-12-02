@@ -1,0 +1,29 @@
+/ section#results.content-section.text-center style="margin-top:-5%;display:block;"
+.container style="margin-top:5%;"
+  ul#myTab.nav.nav-tabs role="tablist"
+    li.nav-item
+      a#home-tab.nav-link.active aria-controls="home" aria-selected="true" data-toggle="tab" href="#home" role="tab"  Home
+    li.nav-item
+      a#profile-tab.nav-link aria-controls="profile" aria-selected="false" data-toggle="tab" href="#profile" role="tab"  Profile
+
+  #myTabContent.tab-content
+    #home.tab-pane.fade.show.active aria-labelledby="home-tab" role="tabpanel"
+      .row
+      .container-fluid
+        .row
+          - videos.all.each.with_index do |video, index|
+                .col-sm-4
+                  .card style=("width: 20rem;margin-top:3%;")
+                    .card-body
+                      h4.card-title Card title
+                      iframe.youtube-player frameborder="0" height="10%" width="100%"  src="http://www.youtube.com/embed/#{video.id}" type="text/html"
+                      br
+                      a.btn.btn-primary href="https://www.youtube.com/watch?v=#{video.id}"  Go Watch Video!
+    #profile.tab-pane.fade aria-labelledby="profile-tab" role="tabpanel"  ...
+javascript:
+  $( document ).ready(function() {
+    console.log( "ready!" );
+    // window.scrollTo(0, document.body.scrollHeight);
+    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+
+  });

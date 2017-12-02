@@ -1,16 +1,42 @@
 .container
-  table class='table' id="query_results_table"
-    thead
-      tr
-        th Name
-        th URL
-        th #{name}
-    tbody
-      - video_id.each.with_index do |video_id, index|
-        tr class='query_result_row' id="#{index}_row"
-          td
-            span class="query_name" id="query_name#{index}"
-              a href="/" id="tmp" #{name}
-          td
-            span class="query_url" id="url_#{index}"
-              a href="https://www.youtube.com/watch?v=#{video_id}" https://www.youtube.com/watch?v=#{video_id}
+  ul#myTab.nav.nav-tabs role="tablist"
+    li.nav-item
+      a#home-tab.nav-link.active aria-controls="home" aria-selected="true" data-toggle="tab" href="#home" role="tab"  Home
+    li.nav-item
+      a#profile-tab.nav-link aria-controls="profile" aria-selected="false" data-toggle="tab" href="#profile" role="tab"  Profile
+
+  #myTabContent.tab-content
+    #home.tab-pane.fade.show.active aria-labelledby="home-tab" role="tabpanel"
+      .row
+        - results.results_video.each.with_index do |video, index|
+              .col-sm-4
+                .card style=("width: 20rem;margin-top:3%;")
+                  .card-body
+                    h4.card-title Card title
+                    iframe.youtube-player frameborder="0" height="10%" width="100%"  src="http://www.youtube.com/embed/#{video}" type="text/html"
+                    br
+                    a.btn.btn-primary href="https://www.youtube.com/watch?v=#{video}"  Go Watch Video!
+    #profile.tab-pane.fade aria-labelledby="profile-tab" role="tabpanel"  ...
+javascript:
+  $( document ).ready(function() {
+    console.log( "ready!" );
+    // window.scrollTo(0, document.body.scrollHeight);
+    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+    var offset = 250;
+
+    var duration = 300;
+
+    jQuery(window).scroll(function() {
+      if (jQuery(this).scrollTop() > offset) {
+          jQuery('.back-to-top').fadeIn(duration);
+      } else {
+        jQuery('.back-to-top').fadeOut(duration);
+      }
+    });
+    jQuery('.back-to-top').click(function(event) {
+      event.preventDefault();
+      jQuery('html, body').animate({scrollTop: 0}, duration);
+      return false;
+
+    });
+  });
