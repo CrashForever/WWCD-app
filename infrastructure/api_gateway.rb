@@ -11,14 +11,14 @@ module VideosPraise
     end
 
     def all_recipe_video
-      call_api(:get, 'video/getAll')
+      call_api(:get, ['video','getAll'])
     end
 
     # def repo(username, reponame)
     #   call_api(:get, ['repo', username, reponame])
     # end
     def identify_img(file)
-      url_route = [@config.api_url, 'google_vision'].flatten.join'/'
+      url_route = [@config.api_url, 'vision', 'upload'].flatten.join'/'
       puts url_route
       results = RestClient.post(url_route,
           :file => File.new(file))
@@ -26,11 +26,11 @@ module VideosPraise
     end
 
     def create_recipe_video(search_name)
-      call_api(:post, 'video/search/'+search_name)
+      call_api(:post, ['video','search',search_name])
     end
 
     def delete_all_videos
-      call_api(:delete, 'video/deleteAll')
+      call_api(:delete, ['video', 'deleteAll'])
     end
 
     def call_api(method, resources)
