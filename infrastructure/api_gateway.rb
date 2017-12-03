@@ -11,7 +11,7 @@ module VideosPraise
     end
 
     def all_recipe_video
-      call_api(:get, 'getAll')
+      call_api(:get, 'video/getAll')
     end
 
     # def repo(username, reponame)
@@ -22,15 +22,15 @@ module VideosPraise
       puts url_route
       results = RestClient.post(url_route,
           :file => File.new(file))
-      puts results.to_s 
+      puts results.to_s
     end
 
     def create_recipe_video(search_name)
-      call_api(:post, 'videosearch/'+search_name)
+      call_api(:post, 'video/search/'+search_name)
     end
 
     def delete_all_videos
-      call_api(:delete, 'delete_videos')
+      call_api(:delete, 'video/deleteAll')
     end
 
     def call_api(method, resources)
