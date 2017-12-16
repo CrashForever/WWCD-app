@@ -54,33 +54,19 @@ module VideosPraise
       routing.on 'uploadFile' do
         routing.post do
           begin
-            puts routing.params['fileToUpload'][:tempfile]
+            #puts routing.params['fileToUpload'][:tempfile]
             tempfile = routing.params['fileToUpload'][:tempfile]
             file_results = ApiGateway.new.identify_img(tempfile)
             analyzed_result = VideosPraise::GoogleVisionResultsRepresenter.new(OpenStruct.new)
                                                           .from_json file_results
-            # puts file_results
-            # puts analyzed_result.label
-            # puts analyzed_result.score
             query_name = analyzed_result.label.to_s+" recipe"
 
-            # video_results_json = ApiGateway.new.all_recipe_video
-            # all_video = VideosPraise::AllVideosRepresenter.new(OpenStruct.new)
-            #                                               .from_json video_results_json
-            # videos = Views::AllVideos.new(all_video)
-            #
-            puts query_name
             video_results_json = ApiGateway.new.create_recipe_video(query_name)
             results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
                                                            .from_json video_results_json
-            puts results_video
+            #puts results_video
             results = Views::ResultsVideo.new(results_video)
 
-            # results.results_video.each {|x| puts x}
-            # results.results_video.each.with_index do |video, index|
-            #   puts video
-            #   puts index
-            # end
             flash[:notice] = 'Search success!'
             view 'search_results', locals: {
               results: results
