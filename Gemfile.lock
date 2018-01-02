@@ -44,10 +44,14 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
     method_source (0.8.2)
+    mime-types (3.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2016.0521)
     minitest (5.10.3)
     minitest-rg (5.2.0)
       minitest (~> 5.0)
     multi_json (1.12.2)
+    netrc (0.11.0)
     parallel (1.12.0)
     parser (2.4.0.0)
       ast (~> 2.2)
@@ -79,6 +83,10 @@ GEM
       uber (< 0.2.0)
     rerun (0.11.0)
       listen (~> 3.0)
+    rest-client (2.0.2)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     roar (1.1.0)
       representable (~> 3.0.0)
     roda (3.1.0)
@@ -136,6 +144,7 @@ DEPENDENCIES
   rake
   reek
   rerun
+  rest-client
   roar
   roda
   rubocop
@@ -146,4 +155,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.15.4
+   1.16.0
