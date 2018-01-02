@@ -15,7 +15,20 @@
                     h4.card-title Card title
                     iframe.youtube-player frameborder="0" height="10%" width="100%"  src="http://www.youtube.com/embed/#{video}" type="text/html"
                     br
-                    a.btn.btn-primary href="https://www.youtube.com/watch?v=#{video}"  Go Watch Video!
+                    a.btn.btn-primary.video{
+                      data-video="https://www.youtube.com/embed/#{video}"
+                      data-toggle="modal"
+                      data-target="#videoModal"
+                    }     Go Watch Video!
+
+      #videoModal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+        .modal-dialog.modal-lg
+          .modal-content
+            .modal-body
+              button.close aria-label="Close" data-dismiss="modal" type="button"
+                span aria-hidden="true"  &times;
+              iframe allowfullscreen="" frameborder="0" height="500px" src="" width="100%"
+
     #profile.tab-pane.fade aria-labelledby="profile-tab" role="tabpanel"  ...
 javascript:
   $( document ).ready(function() {
@@ -37,6 +50,16 @@ javascript:
       event.preventDefault();
       jQuery('html, body').animate({scrollTop: 0}, duration);
       return false;
+    });
 
+    $(".video").click(function () {
+      var theModal = $(this).data("target"),
+      videoSRC = $(this).attr("data-video"),
+      videoSRCauto = videoSRC + "?modestbranding=1&rel=0&controls=1&showinfo=0&html5=1&autoplay=1";
+      console.log(".video clicked");
+      $(theModal + ' iframe').attr('src', videoSRCauto);
+      $(theModal + ' button.close').click(function () {
+        $(theModal + ' iframe').attr('src', videoSRC);
+      });
     });
   });

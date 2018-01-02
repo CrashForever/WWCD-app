@@ -54,16 +54,24 @@ module VideosPraise
       routing.on 'uploadFile' do
         routing.post do
           begin
-            puts routing.params['fileToUpload'][:tempfile]
+            #puts routing.params['fileToUpload'][:tempfile]
             tempfile = routing.params['fileToUpload'][:tempfile]
             file_results = ApiGateway.new.identify_img(tempfile)
-            puts file_results
-            # video_results_json = ApiGateway.new.all_recipe_video
-            # all_video = VideosPraise::AllVideosRepresenter.new(OpenStruct.new)
-            #                                               .from_json video_results_json
-            # videos = Views::AllVideos.new(all_video)
-            #
-            view 'upload_results'
+            analyzed_result = VideosPraise::GoogleVisionResultsRepresenter.new(OpenStruct.new)
+                                                          .from_json file_results
+            query_name = analyzed_result.label.to_s+" recipe"
+
+            video_results_json = ApiGateway.new.create_recipe_video(query_name)
+            results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
+                                                           .from_json video_results_json
+            #puts results_video
+            results = Views::ResultsVideo.new(results_video)
+
+            flash[:notice] = 'Search success!'
+            view 'search_results', locals: {
+              results: results
+            }
+            # view 'upload_results'
           rescue
             flash[:error] = 'Search failed!'
             # ownername, reponame = gh_url.split('/')[-2..-1]
@@ -75,9 +83,7 @@ module VideosPraise
       routing.on 'search' do
         routing.post do
           begin
-            puts '----------'
-            puts routing.params['data']
-            search_name = routing.params['search_name']
+            search_name = routing.params['search_name'].to_s+" recipe"
             video_results_json = ApiGateway.new.create_recipe_video(search_name)
             results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
                                                            .from_json video_results_json
