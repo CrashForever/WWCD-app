@@ -11,7 +11,7 @@ module VideosPraise
     plugin :assets,
             css: ['grayscale.css','style.css'],
             # css: '',
-            js: ['jquery.js','jquery.easing.js','grayscale.js'],
+            js: ['jquery.js','jquery.easing.js','grayscale.js','updateView.js'],
             # js: '',
             # js: '',
             # js: 'bootstrap.bundle.min.js',
@@ -62,16 +62,17 @@ module VideosPraise
             query_name = analyzed_result.label.to_s+" recipe"
 
             video_results_json = ApiGateway.new.create_recipe_video(query_name)
-            results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
-                                                           .from_json video_results_json
-            #puts results_video
-            results = Views::ResultsVideo.new(results_video)
-
-            # flash[:notice] = 'Search success!'
-            view 'search_results', locals: {
-              results: results
-            }
+            # results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
+            #                                                .from_json video_results_json
+            # #puts results_video
+            # results = Views::ResultsVideo.new(results_video)
+            #
+            # # flash[:notice] = 'Search success!'
+            # view 'search_results', locals: {
+            #   results: results
+            # }
             # view 'upload_results'
+            video_results_json
           rescue
             flash[:error] = 'Search failed!'
             # ownername, reponame = gh_url.split('/')[-2..-1]
@@ -85,19 +86,20 @@ module VideosPraise
           begin
             search_name = routing.params['search_name'].to_s+" recipe"
             video_results_json = ApiGateway.new.create_recipe_video(search_name)
-            results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
-                                                           .from_json video_results_json
-            results = Views::ResultsVideo.new(results_video)
-
-            # results.results_video.each {|x| puts x}
-            # results.results_video.each.with_index do |video, index|
-            #   puts video
-            #   puts index
-            # end
-            #flash[:notice] = 'Search success!'
-            view 'search_results', locals: {
-              results: results
-            }
+            # results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
+            #                                                .from_json video_results_json
+            # results = Views::ResultsVideo.new(results_video)
+            #
+            # # results.results_video.each {|x| puts x}
+            # # results.results_video.each.with_index do |video, index|
+            # #   puts video
+            # #   puts index
+            # # end
+            # #flash[:notice] = 'Search success!'
+            # view 'search_results', locals: {
+            #   results: results
+            # }
+            video_results_json
           rescue
             flash[:error] = 'Search failed!'
             # ownername, reponame = gh_url.split('/')[-2..-1]
