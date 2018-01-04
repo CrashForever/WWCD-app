@@ -1,0 +1,25 @@
+.container
+  h2 style="color:#000;margin-top:3%;text-align:center;" Searching Results
+.container
+  .tab-container
+    ul#myTab.nav.nav-tabs role="tablist" style="margin-top:1%"
+      li.nav-item style="border-radius: 4px 4px 0 0 ;"
+        a#Youtube-tab.nav-link.active aria-controls="Youtube" aria-selected="true" data-toggle="tab" href="#Youtube" role="tab" style="color:#d61b0a;"  Youtube
+
+      li.nav-item style="border-radius: 4px 4px 0 0 ;"
+        a#Recipe-tab.nav-link aria-controls="Recipe" aria-selected="false" data-toggle="tab" href="#Recipe" role="tab"  Recipe
+
+    #myTabContent
+      #Youtube.tab-pane.fade.show.active aria-labelledby="Youtube-tab" role="tabpanel"
+        .row#videoContent
+        #videoModal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+          .modal-dialog.modal-lg
+            .modal-content
+              .modal-body
+                button.close aria-label="Close" data-dismiss="modal" type="button"
+                  span aria-hidden="true"  &times;
+              iframe allowfullscreen="true" frameborder="0" height="500px" src="" width="100%"
+
+      #Recipe.tab-pane.fade aria-labelledby="Recipe-tab" role="tabpanel"  ...
+
+button#Back2Top title=("Go to top") style="position:fixed;bottom: 20px;right: 30px;z-index: 99;border: none;outline: none;background-color: red;color: white;cursor: pointer;padding: 15px;border-radius: 10px;"  Top
