@@ -9,9 +9,9 @@ module VideosPraise
   class App < Roda
     plugin :render, engine: 'slim', views: 'presentation/views'
     plugin :assets,
-            css: ['grayscale.css','style.css'],
+            css: ['grayscale.css','style.css', 'nprogress.css'],
             # css: '',
-            js: ['jquery.js','jquery.easing.js','grayscale.js','updateView.js','bootstrap-waitingfor.min.js'],
+            js: ['jquery.js','jquery.easing.js','grayscale.js','updateView.js','nprogress.js'],
             # js: '',
             # js: '',
             # js: 'bootstrap.bundle.min.js',

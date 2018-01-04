@@ -1,4 +1,5 @@
 function getVideos() {
+    NProgress.start();
     var query = document.getElementById('search_input').value
     $.post("search", {
             search_name: query
@@ -9,15 +10,14 @@ function getVideos() {
             for (i=0; i< data.video_id.length; i++) {
                 addVideoView(data.video_id[i]);
             }
-            $('html, body').animate({
-                scrollTop: ($('#myTab').offset().top - 80)
-            },500);
             fixVideoPlayBug();
+            progressDone();
         });
     return false;
 }
 
 function uploadPic(){
+    NProgress.start();
     $.ajax({
         url: '/uploadFile',
         type: 'POST',
@@ -32,10 +32,8 @@ function uploadPic(){
         for (i=0; i< data.video_id.length; i++) {
             addVideoView(data.video_id[i]);
         }
-        $('html, body').animate({
-            scrollTop: ($('#myTab').offset().top - 80)
-        },500);
         fixVideoPlayBug();
+        progressDone();
     });
 
     return false;
@@ -57,6 +55,15 @@ function fixVideoPlayBug(){
             $(theModal + ' iframe').attr('src', videoSRC);
         });
     });
+}
+
+function progressDone(){
+    setTimeout(function() {
+        NProgress.done();
+        $('html, body').animate({
+            scrollTop: ($('#myTab').offset().top - 80)
+        },500);
+    }, 3500);
 }
 
 $(document).ready(function() {
