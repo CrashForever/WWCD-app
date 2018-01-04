@@ -9,7 +9,10 @@ html
     script crossorigin="anonymous" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
     script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"
     script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
-    link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" /
+    link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"
+    / link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    /
+    / script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"
 
     == assets(:css)
     == assets(:js)
@@ -17,20 +20,20 @@ html
   body
     nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top.justify-content-between
       .container
-        a.navbar-brand.js-scroll-trigger href="#page-top"  Chicken Dinner!
+        a#homepage.navbar-brand.js-scroll-trigger href="#page-top"  Chicken Dinner!
         button.navbar-toggler.navbar-toggler-right aria-controls="navbarResponsive" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarResponsive" data-toggle="collapse" type="button"
           | Menu
           i.fa.fa-bars
         #navbarResponsive.collapse.navbar-collapse
           ul.navbar-nav.ml-auto
             li.nav-item
-              a.nav-link.js-scroll-trigger href="/"  About
-            li.nav-item
-              a.nav-link.js-scroll-trigger href="all"  All
+              a#About.nav-link.js-scroll-trigger href="/"  About
+            / li.nav-item
+            /   a.nav-link.js-scroll-trigger href="all"  All
             / li.nav-item
             /   a.nav-link.js-scroll-trigger href="#contact"  Contact
     header.masthead
-      .intro-body style="background-image:url('/images/intro-bg.jpg');background-repeat: no-repeat;background-size:100% 100%;"
+      .intro-body style="background-image:url('/images/food-background-2.jpg');background-repeat: no-repeat;background-size:100% 100%;"
         .container
           .row
             .col-lg-8.mx-auto
@@ -83,32 +86,6 @@ html
                         button.btn.btn-success name="submit" type="submit" style="width:100%;" value="Upload" OK
 
 
-              // javascript:
-              //   window.ondragover = function(e) {e.preventDefault()}
-              //   window.ondrop = function(e) {e.preventDefault(); upload(e.dataTransfer.files[0]); }
-              //   window.upload = function(file){
-              //     /* Is the file an image? */
-              //     console.log("gogogogoggo");
-              //     if (!file || !file.type.match(/image.*/)) return;
-              //     /* It is! */
-              //     /* Lets build a FormData object*/
-              //     var fd = new FormData(); // I wrote about it: https://hacks.mozilla.org/2011/01/how-to-develop-a-html5-image-uploader/
-              //     fd.append("image", file); // Append the file
-              //     var xhr = new XMLHttpRequest(); // Create the XHR (Cross-Domain XHR FTW!!!) Thank you sooooo much imgur.com
-              //     xhr.open("POST", "https://api.imgur.com/3/image.json"); // Boooom!
-              //     xhr.onload = function() {
-              //         // Big win!
-              //         console.log(JSON.parse(xhr.responseText).data.link);
-              //     }
-              //
-              //     xhr.setRequestHeader('Authorization', 'Client-ID daef78ddcc165a3'); // Get your own key http://api.imgur.com/
-              //
-              //     // Ok, I don't handle the errors. An exercise for the reader.
-              //     /* And now, we send the formdata */
-              //     xhr.send(fd);
-              //   }
-
-
-    section
+    div#section style="background-color:#fff;"
       include :flash_bar
       == yield

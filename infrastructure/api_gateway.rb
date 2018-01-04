@@ -22,7 +22,8 @@ module VideosPraise
       puts url_route
       results = RestClient.post(url_route,
           :file => File.new(file))
-      puts results.to_s
+      #puts results.to_s
+      results
     end
 
     def create_recipe_video(search_name)
