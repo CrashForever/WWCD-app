@@ -1,49 +1,34 @@
-/*h1 {
-  font-weight: bold;
+body {
+  padding : 10px ;
+
 }
 
-.posting.body {
-  font-size: 1.2em;
+#exTab1 .tab-content {
+  color : white;
+  background-color: #428bca;
+  padding : 5px 15px;
 }
 
-.attachment.title {
-  font-weight: bold;
+#exTab2 h3 {
+  color : white;
+  background-color: #428bca;
+  padding : 5px 15px;
 }
 
-.attachment.description {
-  font-style: italic;
-  color: grey;
+/* remove border radius for the tab */
+
+#exTab1 .nav-pills > li > a {
+  border-radius: 0;
 }
 
-.vcenter {
-  display: inline-block;
-  vertical-align: middle;
-  float: none;
+/* change border radius for the tab , apply corners on top*/
+
+#exTab3 .nav-pills > li > a {
+  border-radius: 4px 4px 0 0 ;
 }
 
-.vertical-align {
-  display: flex;
-  flex-direction: row;
+#exTab3 .tab-content {
+  color : white;
+  background-color: #428bca;
+  padding : 5px 15px;
 }
-
-.vertical-align > [class^="col-"],
-.vertical-align > [class*=" col-"] {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.blank-row {
-  height: 30px;
-}
-
-.query-bar {
-  background-color: #EEEEEE;
-  padding: 5px 5px 5px 5px;
-}
-
-footer {
-  padding: 0.5in;
-  font-size:11px;
-  color:rgb(100, 100, 100);
-}*/

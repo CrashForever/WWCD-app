@@ -9,7 +9,7 @@ module VideosPraise
   class App < Roda
     plugin :render, engine: 'slim', views: 'presentation/views'
     plugin :assets,
-            css: ['grayscale.css'],
+            css: ['grayscale.css','style.css'],
             # css: '',
             js: ['jquery.js','jquery.easing.js','grayscale.js'],
             # js: '',
@@ -29,7 +29,7 @@ module VideosPraise
 
       routing.root do
         # # http://localhost:3000/api/v0.1/getAll
-        view 'test'
+        view 'root'
       end
       routing.on 'all' do
         routing.get do
@@ -67,7 +67,7 @@ module VideosPraise
             #puts results_video
             results = Views::ResultsVideo.new(results_video)
 
-            flash[:notice] = 'Search success!'
+            # flash[:notice] = 'Search success!'
             view 'search_results', locals: {
               results: results
             }
@@ -94,7 +94,7 @@ module VideosPraise
             #   puts video
             #   puts index
             # end
-            flash[:notice] = 'Search success!'
+            #flash[:notice] = 'Search success!'
             view 'search_results', locals: {
               results: results
             }
