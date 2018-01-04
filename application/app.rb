@@ -11,7 +11,7 @@ module VideosPraise
     plugin :assets,
             css: ['grayscale.css','style.css'],
             # css: '',
-            js: ['jquery.js','jquery.easing.js','grayscale.js','updateView.js'],
+            js: ['jquery.js','jquery.easing.js','grayscale.js','updateView.js','bootstrap-waitingfor.min.js'],
             # js: '',
             # js: '',
             # js: 'bootstrap.bundle.min.js',
