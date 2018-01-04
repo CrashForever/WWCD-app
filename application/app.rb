@@ -45,6 +45,8 @@ module VideosPraise
             }
           rescue
             flash[:error] = 'Search failed!'
+            puts $!
+            puts $@
             # ownername, reponame = gh_url.split('/')[-2..-1]
             # ApiGateway.new.create_repo(ownername, reponame)
           end
@@ -74,6 +76,8 @@ module VideosPraise
             # view 'upload_results'
           rescue
             flash[:error] = 'Search failed!'
+            puts $!
+            puts $@
             # ownername, reponame = gh_url.split('/')[-2..-1]
             # ApiGateway.new.create_repo(ownername, reponame)
           end
@@ -111,6 +115,8 @@ module VideosPraise
             }
           rescue
             flash[:error] = 'Search failed!'
+            puts $!
+            puts $@
             # ownername, reponame = gh_url.split('/')[-2..-1]
             # ApiGateway.new.create_repo(ownername, reponame)
           end
