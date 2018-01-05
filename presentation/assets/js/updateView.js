@@ -7,8 +7,13 @@ function getVideos() {
         .always(function(data) {
             $('#videoContent').empty();
             data = JSON.parse(data);
-            for (i=0; i< data.video_id.length; i++) {
-                addVideoView(data.video_id[i]);
+            video_json = JSON.parse(data.video_json);
+            recipe_json = JSON.parse(data.recipe_json);
+            for (i=0; i< video_json.video_id.length; i++) {
+                addVideoView(video_json.video_id[i]);
+            }
+            for (i=0; i< recipe_json.label.length; i++) {
+                addRecipeView(recipe_json.label[i], recipe_json.url[i], recipe_json.image[i]);
             }
             fixVideoPlayBug();
             progressDone();
@@ -29,8 +34,13 @@ function uploadPic(){
         $('#newFileModal').click();
         $('#videoContent').empty();
         data = JSON.parse(data);
-        for (i=0; i< data.video_id.length; i++) {
-            addVideoView(data.video_id[i]);
+        video_json = JSON.parse(data.video_json);
+        recipe_json = JSON.parse(data.recipe_json);
+        for (i=0; i< video_json.video_id.length; i++) {
+            addVideoView(video_json.video_id[i]);
+        }
+        for (i=0; i< recipe_json.label.length; i++) {
+            addRecipeView(recipe_json.label[i], recipe_json.url[i], recipe_json.image[i]);
         }
         fixVideoPlayBug();
         progressDone();
@@ -43,6 +53,12 @@ function addVideoView(videoID) {
     $("#section").fadeIn(500);
     var content = "<div class=\"col-sm-4\" data-target=\"#videoModal\" data-toggle=\"modal\" data-video=\"https://www.youtube.com/embed/" + videoID + "\" id=\"cardDiv\" style=\"cursor: pointer;\"><div class=\"card\" style=\"width:95%;margin-top:3%;\"><div class=\"card-body\" style=\"background-image:url('/images/card-bg.jpg');background-repeat: no-repeat;background-size:100% 100%;\"><iframe class=\"youtube-player\" frameborder=\"0\" height=\"10%\" src=\"http://www.youtube.com/embed/" + videoID + "\" style=\"pointer-events: none;\" type=\"text/html\" width=\"100%\"></iframe><br></div><div class=\"card-footer\" style=\"background-color:#fff;\"><a class=\"btn btn-primary video\" data-target=\"#videoModal\" data-toggle=\"modal\" data-video=\"https://www.youtube.com/embed/" + videoID + "\">    Go Watch Video!</a></div></div></div>";
     $(content).appendTo('#videoContent');
+}
+
+function addRecipeView(label, website_url, image_url) {
+    $("#section").fadeIn(500);
+    var content = "<div class=\"col-sm-4\" id=\"cardDiv\" onclick=\"window.open('"+ website_url +"','_blank');\" style=\"cursor: pointer;\"><div class=\"card\" style=\"width: 20rem;margin-top:3%;\"><div class=\"card-body\" style=\"background-image:url('/images/card-bg.jpg');background-repeat: no-repeat;background-size:100% 100%;\"><img src=\""+image_url+"\" width=\"100%\">;</div><div class=\"card-footer\" style=\"background-color:#fff; color:black; text-align:center\">"+ label +"</div></div></div>";
+    $(content).appendTo('#recipeContent');
 }
 
 function fixVideoPlayBug(){
