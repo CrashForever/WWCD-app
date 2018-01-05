@@ -17,6 +17,14 @@ module VideosPraise
     # def repo(username, reponame)
     #   call_api(:get, ['repo', username, reponame])
     # end
+    def photo_from_camera(img_string)
+      url_route = [@config.api_url, 'vision', 'camera_photo'].flatten.join'/'
+      puts url_route
+      results = RestClient.post(url_route,
+          :img => img_string)
+      puts results.to_s
+      results
+    end
     def identify_img(file)
       url_route = [@config.api_url, 'vision', 'upload'].flatten.join'/'
       puts url_route
@@ -27,11 +35,15 @@ module VideosPraise
     end
 
     def create_recipe_video(search_name)
-      call_api(:post, ['video','search',search_name])
+      call_api(:post, ['video', 'search', search_name])
     end
 
     def delete_all_videos
       call_api(:delete, ['video', 'deleteAll'])
+    end
+
+    def create_edamam_recipe(search_name)
+      call_api(:get, ['recipe', 'search', search_name])
     end
 
     def call_api(method, resources)
