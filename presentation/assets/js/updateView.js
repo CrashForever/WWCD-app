@@ -49,6 +49,34 @@ function uploadPic(){
     return false;
 }
 
+function uploadCameraPhoto(){
+    NProgress.start();
+    $.ajax({
+        url: '/camera_photo_upload',
+        type: 'POST',
+        cache: false,
+        data: new FormData($('#new-file-form-camera')[0]),
+        processData: false,
+        contentType: false
+    }).always(function(data) {
+        $('#newFileModal').click();
+        $('#videoContent').empty();
+        data = JSON.parse(data);
+        video_json = JSON.parse(data.video_json);
+        recipe_json = JSON.parse(data.recipe_json);
+        for (i=0; i< video_json.video_id.length; i++) {
+            addVideoView(video_json.video_id[i]);
+        }
+        for (i=0; i< recipe_json.label.length; i++) {
+            addRecipeView(recipe_json.label[i], recipe_json.url[i], recipe_json.image[i]);
+        }
+        fixVideoPlayBug();
+        progressDone();
+    });
+
+    return false;
+}
+
 function addVideoView(videoID) {
     $("#section").fadeIn(500);
     var content = "<div class=\"col-sm-4\" data-target=\"#videoModal\" data-toggle=\"modal\" data-video=\"https://www.youtube.com/embed/" + videoID + "\" id=\"cardDiv\" style=\"cursor: pointer;\"><div class=\"card\" style=\"width:95%;margin-top:3%;\"><div class=\"card-body\" style=\"background-image:url('/images/card-bg.jpg');background-repeat: no-repeat;background-size:100% 100%;\"><iframe class=\"youtube-player\" frameborder=\"0\" height=\"10%\" src=\"http://www.youtube.com/embed/" + videoID + "\" style=\"pointer-events: none;\" type=\"text/html\" width=\"100%\"></iframe><br></div><div class=\"card-footer\" style=\"background-color:#fff;\"><a class=\"btn btn-primary video\" data-target=\"#videoModal\" data-toggle=\"modal\" data-video=\"https://www.youtube.com/embed/" + videoID + "\">    Go Watch Video!</a></div></div></div>";
