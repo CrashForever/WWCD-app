@@ -9,9 +9,9 @@ module VideosPraise
   class App < Roda
     plugin :render, engine: 'slim', views: 'presentation/views'
     plugin :assets,
-            css: ['grayscale.css','style.css'],
+            css: ['grayscale.css','style.css', 'nprogress.css'],
             # css: '',
-            js: ['jquery.js','jquery.easing.js','grayscale.js','camera.js'],
+            js: ['jquery.js','jquery.easing.js','grayscale.js','updateView.js','nprogress.js','camera.js'],
             # js: '',
             # js: '',
             # js: 'bootstrap.bundle.min.js',
@@ -69,25 +69,31 @@ module VideosPraise
             puts '---------'
             puts query_name
             video_results_json = ApiGateway.new.create_recipe_video(query_name)
-            results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
+            
+            # results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
                                                            .from_json video_results_json
             #puts results_video
-            results = Views::ResultsVideo.new(results_video)
+            # results = Views::ResultsVideo.new(results_video)
 
             # EDAMAM
             ingredients = analyzed_result.label.to_s
             recipe_results_json = ApiGateway.new.create_edamam_recipe(ingredients)
             puts '@'+recipe_results_json
-            results_recipe = VideosPraise::RecipesRepresenter.new(OpenStruct.new)
+            # results_recipe = VideosPraise::RecipesRepresenter.new(OpenStruct.new)
                                                              .from_json recipe_results_json
-            recipe = Views::ResultsRecipe.new(results_recipe)
+            # recipe = Views::ResultsRecipe.new(results_recipe)
 
             # flash[:notice] = 'Search success!'
-            view 'search_results', locals: {
-              results: results,
-              recipes: recipe
+            # view 'search_results', locals: {
+            #   results: results,
+            #   recipes: recipe
+            # }
+            final_results_json = {
+              video_json: video_results_json,
+              recipe_json: recipe_results_json 
             }
-            # view 'upload_results'
+            final_results_json
+
           rescue
             flash[:error] = 'Search failed!'
 
@@ -144,14 +150,15 @@ module VideosPraise
             # Youtube
             search_name = routing.params['search_name'].to_s+" recipe"
             video_results_json = ApiGateway.new.create_recipe_video(search_name)
-            results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
-                                                           .from_json video_results_json
-            results = Views::ResultsVideo.new(results_video)
-            puts "in search"
-            results.results_video.each.with_index do |video, index|
-              puts index
-              puts video
-            end
+
+#             results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
+#                                                            .from_json video_results_json
+#             results = Views::ResultsVideo.new(results_video)
+#             puts "in search"
+#             results.results_video.each.with_index do |video, index|
+#               puts index
+#               puts video
+#             end
             # results.results_video.each {|x| puts x}
             # results.results_video.each.with_index do |video, index|
             #   puts video
@@ -163,14 +170,20 @@ module VideosPraise
             ingredients = routing.params['search_name'].to_s
             recipe_results_json = ApiGateway.new.create_edamam_recipe(ingredients)
             puts '@'+recipe_results_json
-            results_recipe = VideosPraise::RecipesRepresenter.new(OpenStruct.new)
-                                                             .from_json recipe_results_json
-            recipe = Views::ResultsRecipe.new(results_recipe)
+#             results_recipe = VideosPraise::RecipesRepresenter.new(OpenStruct.new)
+#                                                              .from_json recipe_results_json
+#             recipe = Views::ResultsRecipe.new(results_recipe)
 
-            view 'search_results', locals: {
-              results: results,
-              recipes: recipe
+#             view 'search_results', locals: {
+#               results: results,
+#               recipes: recipe
+#             }
+            final_results_json = {
+              video_json: video_results_json,
+              recipe_json: recipe_results_json 
             }
+            final_results_json
+
           rescue
             flash[:error] = 'Search failed!'
 
