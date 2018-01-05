@@ -11,7 +11,7 @@ module VideosPraise
     plugin :assets,
             css: ['grayscale.css','style.css'],
             # css: '',
-            js: ['jquery.js','jquery.easing.js','grayscale.js'],
+            js: ['jquery.js','jquery.easing.js','grayscale.js','camera.js'],
             # js: '',
             # js: '',
             # js: 'bootstrap.bundle.min.js',
@@ -45,6 +45,8 @@ module VideosPraise
             }
           rescue
             flash[:error] = 'Search failed!'
+            view 'root'
+
             # ownername, reponame = gh_url.split('/')[-2..-1]
             # ApiGateway.new.create_repo(ownername, reponame)
           end
@@ -74,6 +76,44 @@ module VideosPraise
             # view 'upload_results'
           rescue
             flash[:error] = 'Search failed!'
+            view 'root'
+
+            # ownername, reponame = gh_url.split('/')[-2..-1]
+            # ApiGateway.new.create_repo(ownername, reponame)
+          end
+          #routing.redirect '/'
+        end
+      end
+      routing.on 'camera_photo_upload' do
+        routing.post do
+          begin
+            puts routing.params['snapshot'].class
+            photo = routing.params['snapshot']
+            # tempfile = routing.params['fileToUpload'][:tempfile]
+            file_results = ApiGateway.new.photo_from_camera(photo)
+            analyzed_result = VideosPraise::GoogleVisionResultsRepresenter.new(OpenStruct.new)
+                                                          .from_json file_results
+            query_name = analyzed_result.label.to_s+" food recipe"
+
+            video_results_json = ApiGateway.new.create_recipe_video(query_name)
+            results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
+                                                           .from_json video_results_json
+            #puts results_video
+            results = Views::ResultsVideo.new(results_video)
+            results.results_video.each.with_index do |video, index|
+              puts index
+              puts video
+            end
+            #
+            # # flash[:notice] = 'Search success!'
+            view 'search_results', locals: {
+              results: results
+            }
+            #view 'upload_results'
+          rescue
+            flash[:error] = 'Search failed!'
+            view 'root'
+
             # ownername, reponame = gh_url.split('/')[-2..-1]
             # ApiGateway.new.create_repo(ownername, reponame)
           end
@@ -88,7 +128,11 @@ module VideosPraise
             results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
                                                            .from_json video_results_json
             results = Views::ResultsVideo.new(results_video)
-
+            puts "in search"
+            results.results_video.each.with_index do |video, index|
+              puts index
+              puts video
+            end
             # results.results_video.each {|x| puts x}
             # results.results_video.each.with_index do |video, index|
             #   puts video
@@ -100,6 +144,8 @@ module VideosPraise
             }
           rescue
             flash[:error] = 'Search failed!'
+            view 'root'
+
             # ownername, reponame = gh_url.split('/')[-2..-1]
             # ApiGateway.new.create_repo(ownername, reponame)
           end

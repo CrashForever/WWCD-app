@@ -17,6 +17,14 @@ module VideosPraise
     # def repo(username, reponame)
     #   call_api(:get, ['repo', username, reponame])
     # end
+    def photo_from_camera(img_string)
+      url_route = [@config.api_url, 'vision', 'camera_photo'].flatten.join'/'
+      puts url_route
+      results = RestClient.post(url_route,
+          :img => img_string)
+      puts results.to_s
+      results
+    end
     def identify_img(file)
       url_route = [@config.api_url, 'vision', 'upload'].flatten.join'/'
       puts url_route
