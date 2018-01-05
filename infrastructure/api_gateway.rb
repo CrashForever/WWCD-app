@@ -35,11 +35,15 @@ module VideosPraise
     end
 
     def create_recipe_video(search_name)
-      call_api(:post, ['video','search',search_name])
+      call_api(:post, ['video', 'search', search_name])
     end
 
     def delete_all_videos
       call_api(:delete, ['video', 'deleteAll'])
+    end
+
+    def create_edamam_recipe(search_name)
+      call_api(:get, ['recipe', 'search', search_name])
     end
 
     def call_api(method, resources)
