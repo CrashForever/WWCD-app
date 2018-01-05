@@ -62,16 +62,26 @@ module VideosPraise
             analyzed_result = VideosPraise::GoogleVisionResultsRepresenter.new(OpenStruct.new)
                                                           .from_json file_results
             query_name = analyzed_result.label.to_s+" recipe"
-
+            puts '---------'
+            puts query_name
             video_results_json = ApiGateway.new.create_recipe_video(query_name)
             results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
                                                            .from_json video_results_json
             #puts results_video
             results = Views::ResultsVideo.new(results_video)
 
+            # EDAMAM
+            ingredients = analyzed_result.label.to_s
+            recipe_results_json = ApiGateway.new.create_edamam_recipe(ingredients)
+            puts '@'+recipe_results_json
+            results_recipe = VideosPraise::RecipesRepresenter.new(OpenStruct.new)
+                                                             .from_json recipe_results_json
+            recipe = Views::ResultsRecipe.new(results_recipe)
+
             # flash[:notice] = 'Search success!'
             view 'search_results', locals: {
-              results: results
+              results: results,
+              recipes: recipe
             }
             # view 'upload_results'
           rescue
