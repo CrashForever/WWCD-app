@@ -112,13 +112,11 @@ html
                     div class="modal-body" style="overflow: scroll;"
                       canvas#canvas width="640" height="480"
                     div class="modal-footer"
-                      form role="form" action="/camera_photo_upload" enctype="multipart/form-data" method="post" id='new-file-form'
+                      form role="form" action="javascript:uploadCameraPhoto();" enctype="multipart/form-data" method="post" id='new-file-form-camera'
                         input#snapshot name="snapshot" type="hidden"
                         button.btn.btn-success name="submit" type="submit" style="width:100%;" value="Upload" OK
 
 
     div#section style="background-color:#fff;display:none"
       include :search_results_v2
-      == yield
-      include :flash_bar
       == yield

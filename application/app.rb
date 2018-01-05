@@ -10,11 +10,7 @@ module VideosPraise
     plugin :render, engine: 'slim', views: 'presentation/views'
     plugin :assets,
             css: ['grayscale.css','style.css', 'nprogress.css'],
-            # css: '',
             js: ['jquery.js','jquery.easing.js','grayscale.js','updateView.js','nprogress.js','camera.js'],
-            # js: '',
-            # js: '',
-            # js: 'bootstrap.bundle.min.js',
             path: 'presentation/assets'
 
     opts[:root] = 'presentation/assets'
@@ -41,20 +37,13 @@ module VideosPraise
 
             view 'all', locals: {
               videos: videos
-              # video_id: all_video.all_videos
             }
           rescue
             flash[:error] = 'Search failed!'
 
-            puts $!
-            puts $@
-
             view 'root'
 
-            # ownername, reponame = gh_url.split('/')[-2..-1]
-            # ApiGateway.new.create_repo(ownername, reponame)
           end
-          #routing.redirect '/'
         end
       end
       routing.on 'uploadFile' do
@@ -66,28 +55,11 @@ module VideosPraise
             analyzed_result = VideosPraise::GoogleVisionResultsRepresenter.new(OpenStruct.new)
                                                           .from_json file_results
             query_name = analyzed_result.label.to_s+" recipe"
-            puts '---------'
-            puts query_name
             video_results_json = ApiGateway.new.create_recipe_video(query_name)
-
-            # results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
-                                                           # .from_json video_results_json
-            #puts results_video
-            # results = Views::ResultsVideo.new(results_video)
 
             # EDAMAM
             ingredients = analyzed_result.label.to_s
             recipe_results_json = ApiGateway.new.create_edamam_recipe(ingredients)
-            puts '@'+recipe_results_json
-            # results_recipe = VideosPraise::RecipesRepresenter.new(OpenStruct.new)
-                                                             # .from_json recipe_results_json
-            # recipe = Views::ResultsRecipe.new(results_recipe)
-
-            # flash[:notice] = 'Search success!'
-            # view 'search_results', locals: {
-            #   results: results,
-            #   recipes: recipe
-            # }
 
             final_results_json = {
               video_json: video_results_json,
@@ -103,8 +75,6 @@ module VideosPraise
 
             view 'root'
 
-            # ownername, reponame = gh_url.split('/')[-2..-1]
-            # ApiGateway.new.create_repo(ownername, reponame)
           end
           #routing.redirect '/'
         end
@@ -114,15 +84,12 @@ module VideosPraise
           begin
             puts routing.params['snapshot'].class
             photo = routing.params['snapshot']
-            # tempfile = routing.params['fileToUpload'][:tempfile]
             file_results = ApiGateway.new.photo_from_camera(photo)
             analyzed_result = VideosPraise::GoogleVisionResultsRepresenter.new(OpenStruct.new)
                                                           .from_json file_results
             query_name = analyzed_result.label.to_s+" food recipe"
 
             video_results_json = ApiGateway.new.create_recipe_video(query_name)
-            # results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
-            #                                                .from_json video_results_json
 
            # EDAMAM
            ingredients = analyzed_result.label.to_s
@@ -140,26 +107,11 @@ module VideosPraise
            }
            final_results_json.to_json
 
-            #puts results_video
-            # results = Views::ResultsVideo.new(results_video)
-            # results.results_video.each.with_index do |video, index|
-            #   puts index
-            #   puts video
-            # end
-            #
-            # # flash[:notice] = 'Search success!'
-            # view 'search_results', locals: {
-            #   results: results
-            # }
-            #view 'upload_results'
           rescue
             flash[:error] = 'Search failed!'
             view 'root'
 
-            # ownername, reponame = gh_url.split('/')[-2..-1]
-            # ApiGateway.new.create_repo(ownername, reponame)
           end
-          #routing.redirect '/'
         end
       end
       routing.on 'search' do
@@ -167,36 +119,12 @@ module VideosPraise
           begin
             # Youtube
             search_name = routing.params['search_name'].to_s+" recipe"
-            # puts search_name
             video_results_json = ApiGateway.new.create_recipe_video(search_name)
-            # puts video_results_json
-#             results_video = VideosPraise::VideosRepresenter.new(OpenStruct.new)
-#                                                            .from_json video_results_json
-#             results = Views::ResultsVideo.new(results_video)
-#             puts "in search"
-#             results.results_video.each.with_index do |video, index|
-#               puts index
-#               puts video
-#             end
-            # results.results_video.each {|x| puts x}
-            # results.results_video.each.with_index do |video, index|
-            #   puts video
-            #   puts index
-            # end
-            #flash[:notice] = 'Search success!'
 
             # EDAMAM
             ingredients = routing.params['search_name'].to_s
             recipe_results_json = ApiGateway.new.create_edamam_recipe(ingredients)
-            # puts '@'+recipe_results_json
-#             results_recipe = VideosPraise::RecipesRepresenter.new(OpenStruct.new)
-#                                                              .from_json recipe_results_json
-#             recipe = Views::ResultsRecipe.new(results_recipe)
 
-#             view 'search_results', locals: {
-#               results: results,
-#               recipes: recipe
-#             }
             final_results_json = {
               video_json: video_results_json,
               recipe_json: recipe_results_json
@@ -206,15 +134,9 @@ module VideosPraise
           rescue
             flash[:error] = 'Search failed!'
 
-            puts $!
-            puts $@
-
             view 'root'
 
-            # ownername, reponame = gh_url.split('/')[-2..-1]
-            # ApiGateway.new.create_repo(ownername, reponame)
           end
-          #routing.redirect '/'
         end
       end
     end
