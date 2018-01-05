@@ -9,11 +9,16 @@ function getVideos() {
             data = JSON.parse(data);
             video_json = JSON.parse(data.video_json);
             recipe_json = JSON.parse(data.recipe_json);
-            for (i=0; i< video_json.video_id.length; i++) {
-                addVideoView(video_json.video_id[i]);
+            if(video_json.video_id.length ==0 || recipe_json.label.length == 0){
+                alert("Search not found.");
             }
-            for (i=0; i< recipe_json.label.length; i++) {
-                addRecipeView(recipe_json.label[i], recipe_json.url[i], recipe_json.image[i]);
+            else{
+                for (i=0; i< video_json.video_id.length; i++) {
+                    addVideoView(video_json.video_id[i]);
+                }
+                for (i=0; i< recipe_json.label.length; i++) {
+                    addRecipeView(recipe_json.label[i], recipe_json.url[i], recipe_json.image[i]);
+                }
             }
             fixVideoPlayBug();
             progressDone();
@@ -36,11 +41,16 @@ function uploadPic(){
         data = JSON.parse(data);
         video_json = JSON.parse(data.video_json);
         recipe_json = JSON.parse(data.recipe_json);
-        for (i=0; i< video_json.video_id.length; i++) {
-            addVideoView(video_json.video_id[i]);
+        if(video_json.video_id.length ==0 || recipe_json.label.length == 0){
+            alert("Search not found.");
         }
-        for (i=0; i< recipe_json.label.length; i++) {
-            addRecipeView(recipe_json.label[i], recipe_json.url[i], recipe_json.image[i]);
+        else{
+            for (i=0; i< video_json.video_id.length; i++) {
+                addVideoView(video_json.video_id[i]);
+            }
+            for (i=0; i< recipe_json.label.length; i++) {
+                addRecipeView(recipe_json.label[i], recipe_json.url[i], recipe_json.image[i]);
+            }
         }
         fixVideoPlayBug();
         progressDone();
@@ -66,11 +76,16 @@ function uploadCameraPhoto(){
         data = JSON.parse(data);
         video_json = JSON.parse(data.video_json);
         recipe_json = JSON.parse(data.recipe_json);
-        for (i=0; i< video_json.video_id.length; i++) {
-            addVideoView(video_json.video_id[i]);
+        if(video_json.video_id.length ==0 || recipe_json.label.length == 0){
+            alert("Search not found.");
         }
-        for (i=0; i< recipe_json.label.length; i++) {
-            addRecipeView(recipe_json.label[i], recipe_json.url[i], recipe_json.image[i]);
+        else{
+            for (i=0; i< video_json.video_id.length; i++) {
+                addVideoView(video_json.video_id[i]);
+            }
+            for (i=0; i< recipe_json.label.length; i++) {
+                addRecipeView(recipe_json.label[i], recipe_json.url[i], recipe_json.image[i]);
+            }
         }
         fixVideoPlayBug();
         progressDone();
