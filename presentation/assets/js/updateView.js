@@ -51,6 +51,9 @@ function uploadPic(){
 
 function uploadCameraPhoto(){
     NProgress.start();
+    $('#camera_photo').click();
+    $('#camera').click();
+    $('#newFileModal').click();
     $.ajax({
         url: '/camera_photo_upload',
         type: 'POST',
@@ -59,7 +62,6 @@ function uploadCameraPhoto(){
         processData: false,
         contentType: false
     }).always(function(data) {
-        $('#newFileModal').click();
         $('#videoContent').empty();
         data = JSON.parse(data);
         video_json = JSON.parse(data.video_json);
