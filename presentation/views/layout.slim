@@ -13,7 +13,7 @@ html
     / link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     /
     / script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"
-
+    link rel="Shortcut Icon" type="image/x-icon" href="/images/icon.png"
     == assets(:css)
     == assets(:js)
 
@@ -69,6 +69,7 @@ html
               / }
               /   i.material-icons camera_enhance
               / input#upload_file onchange="upload(this.files[0])" style=("visibility: collapse; width: 0px;") type="file" /
+              br
               button.btn.btn-outline-light.my-2.my-sm-0 data-toggle="modal" data-target="#newFileModal" style="width:100px;margin-left:1%;margin-bottom:-5%;"
                 i.material-icons camera_enhance
 
@@ -76,14 +77,102 @@ html
               div id="newFileModal" class="modal fade" role="dialog"
                 div class="modal-dialog"
                   div class="modal-content"
-                    div class="modal-header" upload
+                    div class="modal-header"
+                      button.close aria-label="Close" data-dismiss="modal" type="button"
+                        span aria-hidden="true"  &times;
                     div class="modal-body"
+
+                      .camera style="color:#000;" Take a photo
+                      button#camera_btn.btn.btn-success data-toggle="modal" href="#camera" Clip!
+                      div.hr-sect Or
+                      br
+                      p style="color:#000;" Upload photo
                       form role="form" action="/uploadFile" enctype="multipart/form-data" method="post" id='new-file-form'
                         .fileinput.fileinput-new.input-group data-provides="fileinput"
                           .form-control data-trigger="fileinput"
                             i.glyphicon.glyphicon-file.fileinput-exists
                             input name="fileToUpload" type="file" id="fileToUpload"
                         button.btn.btn-success name="submit" type="submit" style="width:100%;" value="Upload" OK
+
+              div id="camera" class="modal fade" role="dialog"
+                div class="modal-dialog"
+                  div class="modal-content" style="margin-left:-30%;width:160%"
+                    div class="modal-header"
+                      button.close aria-label="Close" data-dismiss="modal" type="button"
+                        span aria-hidden="true"  &times;
+                    div class="modal-body" style="overflow: scroll;"
+                      video#camera_video autoplay="" width="640" height="480"
+                    div class="modal-footer"
+                      button#snap.btn.btn-info data-toggle="modal" href="#camera_photo" Snap Photo
+
+              div id="camera_photo" class="modal fade" role="dialog"
+                div class="modal-dialog"
+                  div class="modal-content" style="margin-left:-30%;width:160%"
+                    div class="modal-header"
+                      button.close aria-label="Close" data-dismiss="modal" type="button"
+                        span aria-hidden="true"  &times;
+                    div class="modal-body" style="overflow: scroll;"
+                      canvas#canvas width="640" height="480"
+                    div class="modal-footer"
+                      form role="form" action="/camera_photo_upload" enctype="multipart/form-data" method="post" id='new-file-form'
+                        input#snapshot name="snapshot" type="hidden"
+                        button.btn.btn-success name="submit" type="submit" style="width:100%;" value="Upload" OK
+
+                    javascript:
+                      $("#camera_btn").click(function () {
+                        // Grab elements, create settings, etc.
+                        var video = document.getElementById('camera_video');
+                        // Get access to the camera!
+                        if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                          // Not adding `{ audio: true }` since we only want video now
+                          navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+                              video.src = window.URL.createObjectURL(stream);
+                              video.play();
+                          });
+                        }
+                      });
+                      function convertCanvasToImage(canvas) {
+                      	var image = new Image();
+                      	image.src = canvas.toDataURL("image/png");
+                      	return image;
+                      }
+                      // Trigger photo take
+                      $("#snap").click(function () {
+                        // Elements for taking the snapshot
+                        var canvas = document.getElementById('canvas');
+                        var context = canvas.getContext('2d');
+                        var video = document.getElementById('camera_video');
+
+                        // Get access to the camera!
+                        // var width = document.getElementById('camera_video').offsetWidth;
+                        // var height = document.getElementById('camera_video').offsetHeight;
+                        // console.log(video.offsetWidth);
+                        // console.log(video.offsetHeight);
+                        document.getElementById('camera_video').style.display="none;";
+                        context.drawImage(video, 0, 0, 640, 480);
+                        // image = convertCanvasToImage(canvas);
+                        document.getElementById('snapshot').value = canvas.toDataURL();;
+                      });
+
+                      /* Legacy code below: getUserMedia
+                      else if(navigator.getUserMedia) { // Standard
+                        navigator.getUserMedia({ video: true }, function(stream) {
+                            video.src = stream;
+                            video.play();
+                        }, errBack);
+                      } else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
+                        navigator.webkitGetUserMedia({ video: true }, function(stream){
+                            video.src = window.webkitURL.createObjectURL(stream);
+                            video.play();
+                        }, errBack);
+                      } else if(navigator.mozGetUserMedia) { // Mozilla-prefixed
+                        navigator.mozGetUserMedia({ video: true }, function(stream){
+                            video.src = window.URL.createObjectURL(stream);
+                            video.play();
+                        }, errBack);
+                      }
+                      */
+
 
 
     div#section style="background-color:#fff;"
