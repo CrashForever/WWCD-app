@@ -102,7 +102,7 @@ function addVideoView(videoID) {
 
 function addRecipeView(label, website_url, image_url) {
     $("#section").fadeIn(500);
-    var content = "<div class=\"col-sm-4\" id=\"cardDiv\" onclick=\"window.open('"+ website_url +"','_blank');\" style=\"cursor: pointer;\"><div class=\"card\" style=\"width: 20rem;margin-top:3%;\"><div class=\"card-body\" style=\"background-image:url('/images/card-bg.jpg');background-repeat: no-repeat;background-size:100% 100%;\"><img src=\""+image_url+"\" width=\"100%\">;</div><div class=\"card-footer\" style=\"background-color:#fff; color:black; text-align:center\">"+ label +"</div></div></div>";
+    var content = "<div class=\"col-sm-4\" id=\"cardDiv\" onclick=\"window.open('"+ website_url +"','_blank');\" style=\"cursor: pointer;\"><div class=\"card\" style=\"width: 95%;margin-top:3%;\"><div class=\"card-body\" style=\"background-image:url('/images/card-bg.jpg');background-repeat: no-repeat;background-size:100% 100%;\"><img src=\""+image_url+"\" width=\"100%\">;</div><div class=\"card-footer\" style=\"background-color:#fff; color:black; text-align:center\">"+ label +"</div></div></div>";
     $(content).appendTo('#recipeContent');
 }
 
