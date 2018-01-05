@@ -71,33 +71,6 @@ javascript:
          $('#mainNav').css('background-color','transparent')
        }
    });
-    // var offset = 250;
-    //
-    // var duration = 300;
-    //
-    // jQuery(window).scroll(function() {
-    //   if (jQuery(this).scrollTop() > offset) {
-    //       jQuery('.back-to-top').fadeIn(duration);
-    //   } else {
-    //     jQuery('.back-to-top').fadeOut(duration);
-    //   }
-    // });
-    // jQuery('.back-to-top').click(function(event) {
-    //   event.preventDefault();
-    //   jQuery('html, body').animate({scrollTop: 0}, duration);
-    //   return false;
-    // });
-
-    // $("#cardDiv").click(function () {
-    //   var theModal = $(this).data("target"),
-    //   videoSRC = $(this).attr("data-video"),
-    //   videoSRCauto = videoSRC + "?modestbranding=1&rel=0&controls=1&showinfo=0&html5=1&autoplay=1";
-    //   console.log(".video clicked");
-    //   $(theModal + ' iframe').attr('src', videoSRCauto);
-    //   $(theModal + ' button.close').click(function () {
-    //     $(theModal + ' iframe').attr('src', videoSRC);
-    //   });
-    // });
     $(".video, #cardDiv").click(function () {
       var theModal = $(this).data("target"),
       videoSRC = $(this).attr("data-video"),
