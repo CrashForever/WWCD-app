@@ -133,9 +133,12 @@ $(document).ready(function() {
         if (scroll_start > ($(document).height()) / 2 - 150) {
             $('#homepage').css('color', '#000');
             $('#About').css('color', '#000');
+            $('#mainNav').css('background-color','#fff')
+
         } else {
             $('#homepage').css('color', '#fff');
             $('#About').css('color', '#fff');
+            $('#mainNav').css('background-color','transparent')
         }
     });
 
