@@ -16,6 +16,7 @@ gem 'puma'
 gem 'rack-flash3'
 gem 'roda'
 gem 'slim'
+gem 'econfig'
 
 # Representers
 gem 'roar'
