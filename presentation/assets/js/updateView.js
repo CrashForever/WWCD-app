@@ -6,6 +6,7 @@ function getVideos() {
         })
         .always(function(data) {
             $('#videoContent').empty();
+            $('#recipeContent').empty();
             data = JSON.parse(data);
             video_json = JSON.parse(data.video_json);
             recipe_json = JSON.parse(data.recipe_json);
@@ -38,6 +39,7 @@ function uploadPic(){
     }).always(function(data) {
         $('#newFileModal').click();
         $('#videoContent').empty();
+        $('#recipeContent').empty();
         data = JSON.parse(data);
         video_json = JSON.parse(data.video_json);
         recipe_json = JSON.parse(data.recipe_json);
@@ -73,6 +75,7 @@ function uploadCameraPhoto(){
         contentType: false
     }).always(function(data) {
         $('#videoContent').empty();
+        $('#recipeContent').empty();
         data = JSON.parse(data);
         video_json = JSON.parse(data.video_json);
         recipe_json = JSON.parse(data.recipe_json);
