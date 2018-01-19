@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module VideosPraise
   # Web API
-  class Api < Roda
-    routing.on 'camera_photo_upload' do
+  class App < Roda
+    route('camera_photo_upload') do |routing|
       routing.post do
         begin
           photo = routing.params['snapshot']

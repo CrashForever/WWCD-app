@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module VideosPraise
   # Web API
-  class Api < Roda
-    routing.on 'uploadFile' do
+  class App < Roda
+    route('uploadFile') do |routing|
       routing.post do
         begin
           tempfile = routing.params['fileToUpload'][:tempfile]

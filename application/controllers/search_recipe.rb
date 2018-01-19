@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module VideosPraise
   # Web API
-  class Api < Roda
-    routing.on 'search' do
+  class App < Roda
+    route('search') do |routing|
       routing.post do
         begin
           # Youtube

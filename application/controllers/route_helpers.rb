@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module VideosPraise
-  class Api < Roda
+  class App < Roda
     def represent_response(result, success_representer)
       http_response = HttpResponseRepresenter.new(result.value)
       response.status = http_response.http_code

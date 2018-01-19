@@ -3,6 +3,7 @@
 require 'roda'
 require 'slim'
 require 'slim/include'
+require_relative 'route_helpers'
 
 module VideosPraise
   # Web App
@@ -30,7 +31,6 @@ module VideosPraise
       routing.root do
         view 'root'
       end
-
       routing.multi_route
     end
   end
