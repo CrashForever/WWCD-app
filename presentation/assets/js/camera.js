@@ -43,8 +43,9 @@ $( document ).ready(function() {
     }, errBack);
   } else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
     navigator.webkitGetUserMedia({ video: true }, function(stream){
-        video.src = window.webkitURL.createObjectURL(stream);
-        video.play();
+        // video.src = window.webkitURL.createObjectURL(stream);
+        video.srcObject = stream;
+	video.play();
     }, errBack);
   } else if(navigator.mozGetUserMedia) { // Mozilla-prefixed
     navigator.mozGetUserMedia({ video: true }, function(stream){
